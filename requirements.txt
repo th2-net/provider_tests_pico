@@ -1,0 +1,10 @@
+click==8.0.3
+pyyaml
+pydantic==1.8.2
+simplejson>=3.17.6
+th2-data-services==2.0.0.dev10897554626
+th2-data-services-utils==0.4.0.dev10898428522
+#th2-data-services-rdp==0.0.0.1.dev11486288321
+#th2-data-services-lwdp==3.1.0.1
+prettytable
+#pytest

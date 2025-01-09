@@ -1,0 +1,27 @@
+default_testing_interval_sec: 86400
+default_test_timeout_sec: 600
+request_params_path: "../request_params.yaml"
+report_file_path: "./report.jsonl"
+test_cases:
+  - name: Speed test messages
+    args: ["speed-test", "messages", "-n 3"]
+
+  - name: Speed test events
+    args: ["speed-test", "events", "-n 3"]
+
+  - name: Barch test messages
+    args: ["analysis", "barch", "messages", "-n 4"]
+
+  - name: Barch test events
+    args: ['analysis', 'barch', 'events', '-n 4']
+    timeout_sec: 180
+
+  - name: Alias test messages
+    args: ['analysis', 'alias']
+
+  - name: Concurrent test messages
+    args: ['analysis', 'concurrent', 'messages', '-n 2']
+
+  - name: Get equivalence tests
+    args: ['get', 'equivalence']
+    no_cfg: true

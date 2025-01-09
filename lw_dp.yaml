@@ -1,0 +1,24 @@
+python -m pip install -r ./py_deps/requirements.txtdefault_data_source: lw_dp
+get_messages_mode: ByGroups
+request_params:
+  book_id: test_book
+  end_timestamp: 1729691711000000000
+  groups:
+  - demo-conn1
+  - demo-conn2
+  scopes:
+  - act
+  - check1
+  - codec-fix-sf
+  - estore
+  - fix-server-1
+  - fix-server-2
+  - lw-data-provider
+  - lw-data-provider-states
+  - mstore-tp
+  - multiclient-fix
+  - rpt-data-provider
+  - sim
+  - test_run
+  - th2-scope
+  start_timestamp: 1729691698000000000

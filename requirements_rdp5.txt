@@ -1,0 +1,2 @@
+#th2-data-services-utils==0.3.5  #  It needs for some analysis plugins
+th2-grpc-data-provider==0.1.6  # it needs to install separately
