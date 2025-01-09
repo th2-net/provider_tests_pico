@@ -45,6 +45,8 @@ def prepare_config_files():
     end_timestamp = request_params.get('end_timestamp')
     if isinstance(end_timestamp, str):
         end_timestamp = datetime.strptime(end_timestamp, '%Y-%m-%dT%H:%M:%S.%fZ')
+    elif isinstance(end_timestamp, int):
+        end_timestamp = datetime.fromtimestamp(end_timestamp // 10**9)
     elif end_timestamp is None:
         end_timestamp = datetime.utcnow()
         request_params['end_timestamp'] = end_timestamp.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
@@ -52,6 +54,8 @@ def prepare_config_files():
     start_timestamp = request_params.get('start_timestamp')
     if isinstance(start_timestamp, str):
         start_timestamp = datetime.strptime(start_timestamp, '%Y-%m-%dT%H:%M:%S.%fZ')
+    elif isinstance(start_timestamp, int):
+        end_timestamp = datetime.fromtimestamp(start_timestamp // 10**9)
     elif start_timestamp is None:
         start_timestamp = end_timestamp - testing_config.default_testing_interval_sec
         request_params['start_timestamp'] = request_params['start_timestamp'].strftime('%Y-%m-%dT%H:%M:%S.%fZ')
