@@ -62,15 +62,15 @@ def prepare_config_files():
 
     if 'scopes' not in request_params:
         get_scopes_cmd_obj = GetEventScopes(book_id, start_timestamp, end_timestamp)
-        request_params['scopes'] = list(ds.ds_impl.command(get_scopes_cmd_obj))
+        request_params['scopes'] = ds.ds_impl.command(get_scopes_cmd_obj)
 
     if 'streams' not in request_params:
         get_aliases_cmd_obj = GetMessageAliases(book_id, start_timestamp, end_timestamp)
-        request_params['streams'] = list(ds.ds_impl.command(get_aliases_cmd_obj))
+        request_params['streams'] = ds.ds_impl.command(get_aliases_cmd_obj)
 
     if 'groups' not in request_params:
         get_groups_cmd_obj = GetMessageGroups(book_id, start_timestamp, end_timestamp)
-        request_params['groups'] = list(ds.ds_impl.command(get_groups_cmd_obj))
+        request_params['groups'] = ds.ds_impl.command(get_groups_cmd_obj)
 
     lw_request_params = request_params.copy()
     del lw_request_params['streams']
