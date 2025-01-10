@@ -89,9 +89,15 @@ def prepare_config_files():
 
     with open(CFG_FILES[0], 'w') as yaml_file:
         yaml.dump(lw_dp_cfg, yaml_file, default_flow_style=False)
+        print(f"File {CFG_FILES[0]} saved. Content:")
+        with open(CFG_FILES[0], 'r') as read_file:
+            print(read_file.read())
 
     with open(CFG_FILES[1], 'w') as yaml_file:
         yaml.dump(rpt_dp_cfg, yaml_file, default_flow_style=False)
+        print(f"File {CFG_FILES[1]} saved. Content:")
+        with open(CFG_FILES[1], 'r') as read_file:
+            print(read_file.read())
 
 def execute_test_case(test_case: TestCase, cfg: str = None) -> tuple[str, list[str], float, int, float, str]:
     try:
