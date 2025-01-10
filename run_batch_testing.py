@@ -55,7 +55,7 @@ def prepare_config_files():
     if isinstance(start_timestamp, str):
         start_timestamp = datetime.strptime(start_timestamp, '%Y-%m-%dT%H:%M:%S.%fZ')
     elif isinstance(start_timestamp, int):
-        end_timestamp = datetime.fromtimestamp(start_timestamp // 10**9)
+        start_timestamp = datetime.fromtimestamp(start_timestamp // 10**9)
     elif start_timestamp is None:
         start_timestamp = end_timestamp - testing_config.default_testing_interval_sec
         request_params['start_timestamp'] = request_params['start_timestamp'].strftime('%Y-%m-%dT%H:%M:%S.%fZ')
