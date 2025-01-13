@@ -7,6 +7,7 @@ from subprocess import TimeoutExpired
 import yaml
 from datetime import datetime
 import time
+import logging
 
 from testing_config import TestingConfig, TestCase
 from th2_ds.cli_util.impl.data_source_wrapper import Lwdp3HttpDataSource
@@ -63,17 +64,17 @@ def prepare_config_files():
     if 'scopes' not in request_params:
         get_scopes_cmd_obj = GetEventScopes(book_id, start_timestamp, end_timestamp)
         request_params['scopes'] = list(ds.ds_impl.command(get_scopes_cmd_obj))
-        print(request_params['scopes'])
+        logging.info(request_params['scopes'])
 
     if 'streams' not in request_params:
         get_aliases_cmd_obj = GetMessageAliases(book_id, start_timestamp, end_timestamp)
         request_params['streams'] = list(ds.ds_impl.command(get_aliases_cmd_obj))
-        print(request_params['streams'])
+        logging.info(request_params['streams'])
 
     if 'groups' not in request_params:
         get_groups_cmd_obj = GetMessageGroups(book_id, start_timestamp, end_timestamp)
         request_params['groups'] = list(ds.ds_impl.command(get_groups_cmd_obj))
-        print(request_params['groups'])
+        logging.info(request_params['groups'])
 
     lw_request_params = request_params.copy()
     del lw_request_params['streams']
