@@ -1,4 +1,4 @@
-python -m pip install -r ./py_deps/requirements.txtdefault_data_source: lw_dp
+default_data_source: lw_dp
 get_messages_mode: ByGroups
 request_params:
   book_id: test_book
