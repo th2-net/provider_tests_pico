@@ -63,9 +63,9 @@ def prepare_config_files():
     import pprint
     if 'scopes' not in request_params:
         get_scopes_cmd_obj = GetEventScopes(book_id, start_timestamp, end_timestamp)
-        scopes_res = ds.ds_impl.command(get_scopes_cmd_obj)
+        scopes_res = list(ds.ds_impl.command(get_scopes_cmd_obj))
         pprint.pprint(vars(scopes_res))
-        request_params['scopes'] = list(scopes_res)
+        request_params['scopes'] = scopes_res
 
     if 'streams' not in request_params:
         get_aliases_cmd_obj = GetMessageAliases(book_id, start_timestamp, end_timestamp)
