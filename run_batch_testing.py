@@ -60,9 +60,12 @@ def prepare_config_files():
         start_timestamp = end_timestamp - testing_config.default_testing_interval_sec
         request_params['start_timestamp'] = request_params['start_timestamp'].strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 
+    import pprint
     if 'scopes' not in request_params:
         get_scopes_cmd_obj = GetEventScopes(book_id, start_timestamp, end_timestamp)
-        request_params['scopes'] = list(ds.ds_impl.command(get_scopes_cmd_obj))
+        scopes_res = ds.ds_impl.command(get_scopes_cmd_obj)
+        pprint.pprint(vars(scopes_res))
+        request_params['scopes'] = list(scopes_res)
 
     if 'streams' not in request_params:
         get_aliases_cmd_obj = GetMessageAliases(book_id, start_timestamp, end_timestamp)
