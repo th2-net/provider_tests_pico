@@ -7,7 +7,6 @@ from subprocess import TimeoutExpired
 import yaml
 from datetime import datetime
 import time
-import logging
 
 from testing_config import TestingConfig, TestCase
 from th2_ds.cli_util.impl.data_source_wrapper import Lwdp3HttpDataSource
@@ -63,15 +62,15 @@ def prepare_config_files():
 
     if 'scopes' not in request_params:
         get_scopes_cmd_obj = GetEventScopes(book_id, start_timestamp, end_timestamp)
-        request_params['scopes'] = list(ds.ds_impl.command(get_scopes_cmd_obj))[0] # TODO: why nested lists
+        request_params['scopes'] = list(ds.ds_impl.command(get_scopes_cmd_obj))[0] # TODO: why nested lists?
 
     if 'streams' not in request_params:
         get_aliases_cmd_obj = GetMessageAliases(book_id, start_timestamp, end_timestamp)
-        request_params['streams'] = list(ds.ds_impl.command(get_aliases_cmd_obj))[0] # TODO: why nested lists
+        request_params['streams'] = list(ds.ds_impl.command(get_aliases_cmd_obj))[0] # TODO: why nested lists?
 
     if 'groups' not in request_params:
         get_groups_cmd_obj = GetMessageGroups(book_id, start_timestamp, end_timestamp)
-        request_params['groups'] = list(ds.ds_impl.command(get_groups_cmd_obj))[0] # TODO: why nested lists
+        request_params['groups'] = list(ds.ds_impl.command(get_groups_cmd_obj))[0] # TODO: why nested lists?
 
     lw_request_params = request_params.copy()
     del lw_request_params['streams']
