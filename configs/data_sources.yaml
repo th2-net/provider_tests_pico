@@ -5,7 +5,7 @@ data_sources:
     chunk_length: 65536
     ds_impl:
       lib: th2-data-services-lwdp
-      version: 3.1.2.0
+      version: 3.1.0.1
     cli_ds_class: Lwdp3HttpDataSource
 
   rpt_dp:

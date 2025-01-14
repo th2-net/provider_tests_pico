@@ -29,6 +29,9 @@ class CommonLogicForLwdpRelatedClasses(ITh2DataSourceWrapper):
     @override
     def get_messages_obj(self, ctx, command_kwargs=None):
         if ctx.cfg.get_messages_mode == "ByGroups":
+            import pkg_resources
+            version = pkg_resources.get_distribution('th2-data-services-lwdp').version
+            print("th2-data-services-lwdp version: " + version)
             from th2_data_services.data_source.lwdp.commands.http import GetMessagesByBookByGroups
             return GetMessagesByBookByGroups(**get_command_class_args(ctx.cfg, GetMessagesByBookByGroups, command_kwargs))
         elif ctx.cfg.get_messages_mode == "ByStreams":
