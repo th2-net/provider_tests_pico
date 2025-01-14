@@ -166,8 +166,15 @@ def common_logic(ds_wrapper: ds_w.CommonLogicForLwdpRelatedClasses,
                 get_events_obj = ds_wrapper.get_events_obj(ctx, dict(start_timestamp=start_ts_part))
                 short_range: Data = ds_wrapper.ds_impl.command(get_events_obj)
 
-                start_ns = int(start_ts_part.timestamp() * 10 ** 3) * 10 ** 6
-                end_ns = int(cfg.request_params.end_timestamp.timestamp() * 10 ** 3) * 10 ** 6
+                if isinstance(start_ts_part, datetime):
+                    start_ns = int(start_ts_part.timestamp() * 10 ** 3) * 10 ** 6
+                else:
+                    start_ns = start_ts_part
+
+                if isinstance(cfg.request_params.end_timestamp, datetime):
+                    end_ns = int(cfg.request_params.end_timestamp.timestamp() * 10 ** 3) * 10 ** 6
+                else:
+                    end_ns = cfg.request_params.end_timestamp
 
                 range_results: list[str] = ['PASSED']
                 # Print request label.
@@ -365,8 +372,8 @@ def common_logic(ds_wrapper: ds_w.CommonLogicForLwdpRelatedClasses,
                     highest_time_in_short_range = short_range_lst[-1]['unix_timestamp']
                     if highest_time_in_short_range is None:
                         highest_time_in_short_range = short_range_lst[-1]['unix_timestamp'][0]
-                    msg = (f"Lowest time in short range: {datetime.fromtimestamp(lowest_time_in_short_range, tz=timezone.utc)} [UTC] ({lowest_time_in_short_range} ns)\n"
-                           f"Highest time in short range: {datetime.fromtimestamp(highest_time_in_short_range, tz=timezone.utc)} [UTC] ({highest_time_in_short_range} ns)\n")
+                    msg = (f"Lowest time in short range: {datetime.fromtimestamp(lowest_time_in_short_range / 1_000_000_000, tz=timezone.utc)} [UTC] ({lowest_time_in_short_range} ns)\n"
+                           f"Highest time in short range: {datetime.fromtimestamp(highest_time_in_short_range / 1_000_000_000, tz=timezone.utc)} [UTC] ({highest_time_in_short_range} ns)\n")
                 else:
                     msg = (f"Lowest time in short range: None\n"
                            f"Highest time in short range: None \n")
