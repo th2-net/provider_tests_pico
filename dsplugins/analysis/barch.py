@@ -169,7 +169,7 @@ def common_logic(ds_wrapper: ds_w.CommonLogicForLwdpRelatedClasses,
                 if isinstance(start_ts_part, datetime):
                     start_ns = int(start_ts_part.timestamp() * 10 ** 3) * 10 ** 6
                 else:
-                    start_ns = start_ts_part
+                    start_ns = int(start_ts_part)
 
                 if isinstance(cfg.request_params.end_timestamp, datetime):
                     end_ns = int(cfg.request_params.end_timestamp.timestamp() * 10 ** 3) * 10 ** 6
@@ -179,8 +179,8 @@ def common_logic(ds_wrapper: ds_w.CommonLogicForLwdpRelatedClasses,
                 range_results: list[str] = ['PASSED']
                 # Print request label.
                 msg =(f"[{idx + 1:0>3}] Request time: {time.time()}"
-                      f"Start: {start_ts_part} ({start_ns} ns)\n"
-                      f"  End: {cfg.request_params.end_timestamp} ({end_ns} ns)")
+                      f" Start: {start_ts_part} ({start_ns} ns)\n"
+                      f" End: {cfg.request_params.end_timestamp} ({end_ns} ns)")
                 print(msg)
                 range_results.append(msg)
 
@@ -192,8 +192,8 @@ def common_logic(ds_wrapper: ds_w.CommonLogicForLwdpRelatedClasses,
                     highest_time_in_short_range = short_range_lst[-1]['unix_timestamp'][1]
                     if highest_time_in_short_range is None:
                         highest_time_in_short_range = short_range_lst[-1]['unix_timestamp'][0]
-                    msg = (f"Lowest time in short range: {datetime.fromtimestamp(lowest_time_in_short_range, tz=timezone.utc)} [UTC] ({lowest_time_in_short_range} ns)\n"
-                           f"Highest time in short range: {datetime.fromtimestamp(highest_time_in_short_range, tz=timezone.utc)} [UTC] ({highest_time_in_short_range} ns)\n")
+                    msg = (f"Lowest time in short range: {datetime.fromtimestamp(lowest_time_in_short_range / 1_000_000_000, tz=timezone.utc)} [UTC] ({lowest_time_in_short_range} ns)\n"
+                           f"Highest time in short range: {datetime.fromtimestamp(highest_time_in_short_range / 1_000_000_000, tz=timezone.utc)} [UTC] ({highest_time_in_short_range} ns)\n")
                 else:
                     msg = (f"Lowest time in short range: None\n"
                            f"Highest time in short range: None\n")
@@ -359,8 +359,8 @@ def common_logic(ds_wrapper: ds_w.CommonLogicForLwdpRelatedClasses,
 
                 # Print request label.
                 msg = (f"[{idx + 1:0>3}] Request time: {time.time()}\n"
-                       f"Start: {datetime.utcfromtimestamp(start_ts_part / 1_000_000_000)} ({start_ts_part} ns)\n"
-                       f"  End: {datetime.utcfromtimestamp(cfg.request_params.end_timestamp / 1_000_000_000)} ({cfg.request_params.end_timestamp} ns)")
+                       f" Start: {datetime.utcfromtimestamp(start_ts_part / 1_000_000_000)} ({start_ts_part} ns)\n"
+                       f" End: {datetime.utcfromtimestamp(cfg.request_params.end_timestamp / 1_000_000_000)} ({cfg.request_params.end_timestamp} ns)")
                 print(msg)
                 range_results.append(msg)
 
